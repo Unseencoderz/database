@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Data Submission Form</title>
+    <link rel="stylesheet" type="css" href="{{ url_for('static', filename='style.css') }}">
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    background-color: #f1cbff;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    text-align: center;
+    color: #a494ff;
+    margin: 20px;
+    transition: color 0.3s ease; /* Add color transition */
+}
+
+h1:hover {
+    color: #33ff36; /* Change heading color on hover */
+}
+
+form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #da76ff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    text-align: center;
+}
+
+input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #87002f;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+input[type="submit"] {
+    background-color: #333;
+    color: #acff8b;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Add transform transition */
+}
+
+input[type="submit"]:hover {
+    background-color: #ff7e7e;
+    transform: scale(1.05); /* Add hover scaling animation */
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    margin: 10px 0;
+}
+
+a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+</style>
+</head>
+<body>
+  
+    <h1 style="color: rgb(1, 79, 79);">Submission Form</h1>
+    <form method="POST" action="/submit" enctype="multipart/form-data">
+        <label for="file">Choose a File:</label>
+        <input type="file" id="file" name="file" required>
+        <br>
+        <input type="submit" value="Submit">
+    </form>
+
+    <h2>Download Data</h2>
+    <ul>
+        {% for entry in entries %}
+            <li>
+                <a href="{{ url_for('download_file', filename=entry['name']) }}">Download {{ entry['name'] }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
